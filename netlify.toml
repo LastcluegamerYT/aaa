@@ -1,6 +1,6 @@
 [build]
-  publish = "front/views"  # This should point to the directory containing your index.html
-  command = "npm run build"  # Or adjust based on your actual build command
+  publish = "front/views"  # Adjust this if your HTML files are somewhere else
+  command = "npm install && npm run build"  # If you have a build step
 
 [[redirects]]
   from = "/*"
