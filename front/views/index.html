@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   {{> head}}
+ <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>prashant Chess Page</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #6dd5fa, #2980b9);
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #loader {
+            width: 100%;
+            height: 100%;
+            background-color: #f4f4f4;
+            position: absolute;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 1;
+            transition: opacity 1s ease;
+        }
+
+        #loader.hidden {
+            opacity: 0;
+            z-index: -1;
+        }
+
+        .loading-circle {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(0, 0, 0, 0.1);
+            border-top: 5px solid #2980b9;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 2s ease forwards;
+            opacity: 0;
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: scale(0.95); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        h2 {
+            font-size: 2.5em;
+            color: #2980b9;
+            margin-bottom: 20px;
+        }
+
+        input[type="text"] {
+            width: 240px;
+            padding: 12px;
+            border-radius: 6px;
+            border: 2px solid #ccc;
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        button {
+            padding: 12px 30px;
+            font-size: 18px;
+            color: white;
+            background-color: #2980b9;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            margin: 0 10px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #1c5985;
+            transform: translateY(-5px);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        #errorMessage {
+            color: red;
+            margin-top: 15px;
+            font-size: 18px;
+        }
+
+        header {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 1.5em;
+            color: #fff;
+            animation: slideDown 1s ease forwards;
+            transform: translateY(-100%);
+            opacity: 0;
+        }
+
+        @keyframes slideDown {
+            0% { transform: translateY(-100%); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+
+        footer {
+            position: absolute;
+            bottom: 20px;
+            font-size: 1em;
+            color: #fff;
+            text-align: center;
+            width: 100%;
+            animation: fadeInFooter 2s ease forwards;
+            opacity: 0;
+        }
+
+        @keyframes fadeInFooter {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div id="loader">
+        <div class="loading-circle"></div>
+    </div>
+
+    <header>Chess created by Prashant Pandey</header>
+
+    <div class="container">
+        <h2>Enter Game Code</h2>
+        <input type="text" id="codeInput" placeholder="Enter game code">
+        <br>
+        <button id="createGame">Create Game</button>
+        <button id="joinGame">Join Game</button>
+        <div id="errorMessage"></div>
+    </div>
+
+    <footer>&copy; 2024 Prashant Pandey</footer>
+
+    <script>
+        // Simulate a loading delay of 4-7 seconds
+        window.onload = function() {
+            setTimeout(function() {
+                document.getElementById('loader').classList.add('hidden');
+            }, Math.random() * (7000 - 4000) + 4000);
+        };
+
+        document.getElementById('createGame').addEventListener('click', function() {
+            window.location.replace('/white?code=' + document.getElementById('codeInput').value);
+        });
+
+        document.getElementById('joinGame').addEventListener('click', function() {
+            window.location.replace('/black?code=' + document.getElementById('codeInput').value);
+        });
+
+        var urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('error') === 'invalidCode') {
+            document.getElementById('errorMessage').textContent = 'Invalid invite code';
+        }
+    </script>
+</body>
+</html>

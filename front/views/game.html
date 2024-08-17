@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {{> head}}
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.7);
+            text-align: center;
+            font-size: 1.5em;
+            animation: fadeInDown 1.5s ease;
+        }
+
+        footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            padding: 10px;
+            background-color: rgba(0, 0, 0, 0.7);
+            text-align: center;
+            font-size: 1em;
+            animation: fadeInUp 1.5s ease;
+        }
+
+        #myBoard {
+            width: 90vw;
+            max-width: 700px;
+            margin-top: 100px;
+            margin-bottom: 50px;
+            box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.5);
+            border-radius: 8px;
+            overflow: hidden;
+            animation: zoomIn 1s ease;
+        }
+
+        label {
+            font-size: 1.2em;
+            margin-top: 10px;
+            animation: fadeIn 2s ease;
+        }
+
+        #status, #pgn {
+            padding: 10px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            margin-bottom: 20px;
+            animation: fadeIn 2s ease;
+            width: 90%;
+            max-width: 700px;
+            word-wrap: break-word;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes zoomIn {
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        Created by Prashant Pandey
+    </header>
+
+    <div id="myBoard"></div>
+    
+    <label>Status:</label>
+    <div id="status"></div>
+    
+    <label>PGN:</label>
+    <div id="pgn"></div>
+
+    <footer>
+        Copyright ©️ Prashant Pandey
+    </footer>
+
+    <script>
+        let playerColor = '{{color}}';
+        console.log('Playing as ' + playerColor);
+
+        // Example of setting status and PGN for testing
+        document.getElementById('status').innerText = 'White to move';
+        document.getElementById('pgn').innerText = '1. e4 e5 2. Nf3 Nc6 3. Bb5 a6 4. Ba4 Nf6 5. O-O Be7';
+    </script>
+
+    <script src="/public/js/index.js"></script>
+</body>
+
+</html>
